@@ -1,68 +1,59 @@
-# projectile-motion-simulation
-A Python-based numerical simulation of projectile motion with optional air resistance and interactive visualization.
-
-# Numerical Projectile Motion Simulation
-
-This repository contains a Python-based numerical simulation of two-dimensional projectile motion, comparing ideal motion (no air resistance) with motion including linear and quadratic drag.
-
-The project focuses on using numerical methods to model realistic physical systems that do not admit simple closed-form solutions.
+# Numerical Projectile Motion Simulation: RK4 vs Euler Comparison
+A Python-based numerical simulation of projectile motion with interactive visualization comapring RK4 and Euler time-step integrations. Parameters such as mass, drag, initial velocity, initial height, and more can be interacted with.
 
 ---
 
 ## Overview
 
-The simulation models a projectile launched at a given angle and speed under gravity. Two physical cases are simulated:
+This project numerically simulates two-dimensional projectile motion **with air resistance enabled**, focusing on a direct comparison between numerical integration methods.
 
-* **Ideal projectile motion** (gravity only)
-* **Projectile motion with air resistance**, using either linear or quadratic drag models
+The same physical system (same drag model, timestep, and initial conditions) is solved using:
 
-The equations of motion are solved numerically using either:
-
-* **Fourth-order Runge–Kutta (RK4)** integration, or  
+* **Fourth-order Runge–Kutta (RK4)**
 * **Forward Euler integration**
 
-The integration method can be selected interactively in a Jupyter or Google Colab environment.
+This allows clear visualization of numerical accuracy, stability, and error accumulation between integrators when applied to a non-linear dynamical system with drag.
 
 ---
 
 ## Features
 
-* Ideal (no-drag) projectile motion
+* Projectile motion with air resistance (always enabled)
 * Air resistance models:
-  * Linear drag
-  * Quadratic drag
-* Adjustable physical parameters:
-  * Mass
-  * Drag coefficients
-  * Launch angle
-  * Initial speed
-  * Timestep
-* Multiple numerical integration methods:
+  * Quadratic drag (default)
+  * Linear drag (optional via parameter toggle)
+* Fixed physical parameters for controlled comparison
+* Numerical integration methods:
   * Fourth-order Runge–Kutta (RK4)
   * Forward Euler
-* Interactive integrator selection via dropdown (Jupyter / Colab)
-* Automatic detection of ground impact with interpolation for accurate landing position
+* Direct integrator comparison:
+  * Identical initial conditions and timestep
+  * Identical force model
+* Automatic ground-impact detection with linear interpolation
 * Static visualizations:
-  * Trajectory (x–y)
-  * Speed vs. time
-  * Height vs. time
+  * Trajectory comparison (RK4 vs Euler)
+  * Speed vs time (RK4 vs Euler)
+  * Height vs time (RK4 vs Euler)
 * Animated visualization:
-  * 2D projectile motion (“ball” animation)
-  * Fading trajectory trail
+  * Overlayed 2D projectile motion
+  * RK4 and Euler shown simultaneously
+  * Fading trajectory trails
   * Time overlay formatted as **mm:ss.hh**
+  * Color-coded integrator key
 
 ---
 
 ## Methods
 
-* Newton’s Second Law applied to two-dimensional motion
-* System of coupled first-order ordinary differential equations
+* Newton’s Second Law applied to two-dimensional motion with drag
+* Coupled first-order ordinary differential equations
 * Numerical time integration using:
   * Fourth-order Runge–Kutta (RK4)
   * Forward Euler method
 * Fixed timestep integration
-* Event detection for ground impact using linear interpolation
-* Numerical comparison between integration schemes
+* Non-linear drag force (quadratic or linear)
+* Ground-impact event detection using linear interpolation
+* Side-by-side numerical comparison of integration accuracy
 
 ---
 
@@ -79,12 +70,11 @@ The integration method can be selected interactively in a Jupyter or Google Cola
 ## Usage
 
 1. Open the notebook in Jupyter or Google Colab.
-2. Adjust physical and numerical parameters in the configuration section.
-3. Use the dropdown menu to select the numerical integrator (RK4 or Euler).
-4. Run the notebook to:
-   * Compare trajectories with and without air resistance
-   * Visualize numerical differences between integration methods
-   * View both static plots and animated projectile motion
+2. Adjust physical parameters (launch angle, speed, drag model, timestep).
+3. Run the notebook to:
+   * Compare RK4 and Euler trajectories under identical conditions
+   * Observe numerical error accumulation
+   * View static plots and a combined overlay animation
 
 ---
 
@@ -95,3 +85,16 @@ The integration method can be selected interactively in a Jupyter or Google Cola
 * Additional integrators (Verlet, midpoint, symplectic methods)
 * Quantitative comparison of Euler vs RK4 error
 * Experimental validation with real projectile data
+
+---
+
+## Motivation
+
+Projectile motion with air resistance has no closed-form analytical solution.  
+This makes it an ideal test case for comparing numerical integration methods.
+
+By keeping the physical system fixed and varying only the integrator, this project highlights:
+* Stability differences
+* Error accumulation
+* The limitations of first-order methods
+* The advantages of higher-order schemes for non-linear dynamics
