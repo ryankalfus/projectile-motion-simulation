@@ -44,13 +44,14 @@ Static plots always included:
 - **Height vs time**
 
 Additional analytical validation (only when drag is OFF):
-- The above three plots include a **third curve**: **Analytical (closed-form)**
+- The above three plots include a **third curve**: **Analytical (closed-form)**  
+- **Note:** In the no-drag case, RK4 can be so accurate (especially for small/moderate `dt`) that the RK4 and analytical curves may **overlap almost perfectly**, making one appear “missing” because it is drawn directly on top of the other.
 
 Animated overlay visualization:
 - 2D animation with fading trails and mm:ss.hh time overlay
 - Shows:
   - RK4 vs Euler when drag is ON
-  - RK4 vs Euler vs Analytical when drag is OFF
+  - RK4 vs Euler vs Analytical when drag is OFF (with the same possible overlap behavior described above)
 
 ### Error analysis (numerical self-consistency)
 - **Error vs time**: position error relative to a higher-resolution RK4 reference run
@@ -115,8 +116,8 @@ However, when **quadratic drag** is enabled, the equations become **nonlinear** 
 
 - With **drag ON**, RK4 and Euler will diverge increasingly over time because Euler accumulates more numerical error and is less stable for nonlinear dynamics.
 - With **drag OFF**, the **analytical closed-form curve** provides a direct correctness check:
-  - RK4 should track very closely for moderate dt
-  - Euler will deviate noticeably unless dt is made small
+  - RK4 should track very closely for moderate `dt` (often overlapping the analytical curve)
+  - Euler will deviate noticeably unless `dt` is made small
 
 The error plots provide quantitative evidence of accuracy and timestep sensitivity.
 
