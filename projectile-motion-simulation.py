@@ -18,7 +18,7 @@ v0 = 20.0                   # initial speed (m/s)
 y0 = 0.0                    # initial height (m)
 
 # Drag options:
-use_quadratic_drag = False   # True: quadratic drag, False: NO drag
+use_quadratic_drag = True   # True: quadratic drag, False: NO drag
 
 # Physical-ish defaults (good enough for a project)
 m = 0.145                   # mass (kg) ~ baseball
@@ -35,7 +35,7 @@ b_lin = 0.02                # kg/s (kept for compatibility)
 
 # Enforce: if no quadratic drag, then no drag at all and b_lin = 0
 if not use_quadratic_drag:
-    b_lin = 0.0
+    b_lin = 0.2
 
 dt = 0.1                    # time step (s)
 t_max = 10.0                # max sim time (s)
